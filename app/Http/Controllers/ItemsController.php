@@ -22,7 +22,7 @@ class ItemsController extends Controller
 
     public function create()
     {
-        
+
         return view('items.create');
     }
 
@@ -96,14 +96,23 @@ class ItemsController extends Controller
     }
     public function verifyproduct(Request $request)
     {
+
         $code = $request->code;
         $rows = Items::select('*')->where('code', $code)->first();
 
         // $row = DB::table('items')->where('code', $code)->get();
         // die();
         // $data = compact('rows');
-        return view('items.printSlip', ['row' => $rows]);
+        if (isset($rows)) {
+            // return view('items.Productview');
 
+
+            return view('items.printSlip', ['row' => $rows]);
+        } else {
+            $messge = "Enter valid Code";
+            $error = compact('messge');
+            return view('items.Productview')->with($error);
+        }
 
         // if (isset($row)) {
         // } else {

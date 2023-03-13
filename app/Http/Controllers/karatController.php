@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Karat;
 use App\Models\Categories;
@@ -21,7 +22,16 @@ class karatController extends Controller
      */
     public function index()
     {
+        // $karat = DB::table('karat')->join('categories AS c', 'c.id', '=', 'karat.category_id')->select('karat.name','category_id','c.name as cname')->OrderBy('karat.id', 'DESC')->get();
+
+        // echo '<pre>';
+        // print_r($karat);
+        // die();
+
+        // arbaz bhai code 
         $karat = Karat::OrderBy('id', 'DESC')->latest()->paginate(10);
+
+        // Karat::select(*)->where('id',$id)->get();
         return view('karat.index', compact('karat'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

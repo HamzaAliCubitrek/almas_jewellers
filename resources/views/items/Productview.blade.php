@@ -24,6 +24,7 @@
 </head>
 
 <body>
+
     <section class="content-header p-0">
         <div class="container-fluid p-0">
             <div class="row mb-5 text-center">
@@ -42,6 +43,7 @@
 
         <form action="{{ url('items/verify') }}" id="" method="POST">
             @csrf
+
             <input type="hidden" name="id" id="id" value="{{ isset($data->id) ? $data->id : '' }}">
             <div class="row">
 
@@ -53,8 +55,22 @@
                         <div class="card-header">
                             <h4>Enter Product Code</h4>
                         </div>
+                        <?php
+                        if(isset($messge)){
+
+                            ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php
+                            echo $messge;
+                            ?>
+                        </div>
+                        <?php
+                            
+                        }
+                        ?>
 
                         <div class="card-body">
+
 
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 col-md-4 text-center">
@@ -63,6 +79,7 @@
                                         <input class="form-control w-100" type="hidden" id="market" name="">
                                     </div>
                                 </div>
+
                                 <div class="col-xs-4 col-sm-4 col-md-4 text-center">
                                     <div class="form-group">
                                         <strong>Code:</strong>

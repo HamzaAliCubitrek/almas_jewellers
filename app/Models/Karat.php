@@ -12,4 +12,9 @@ class Karat extends Model
     use HasFactory, SoftDeletes, UuidTrait;
     protected $table = 'karat';
     protected $fillable = ["*"];
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, 'category_id');
+    }
 }

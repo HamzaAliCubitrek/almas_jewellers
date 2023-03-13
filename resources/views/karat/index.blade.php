@@ -48,7 +48,7 @@
                             <tr id="row_{{ $key }}">
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $karat->name }}</td>
-                                <td>{{ $karat->category_id }}</td>
+                                <td>{{ isset($karat->category) ? $karat->category->name : "Not Assigned" }}</td>
                                 <td>{{ $karat->description }}</td>
                                 <td>{{ $karat->purity }}</td>
                                 <td>{{ $karat->quantity }}</td>
