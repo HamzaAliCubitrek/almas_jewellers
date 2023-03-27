@@ -140,7 +140,7 @@ class GoldSheetController extends Controller
 
         // $id = GoldRatesSheet::all('id')->where('status', '=', 1);
         $ids  = DB::table("gold_rates_sheets")->select("id")->where("status", 1)->get()->first()->id;
-        
+
         $data = GoldRatesSheet::findorFail($ids);
 
         // $data = GoldRatesSheet::findorFail($request->id);
@@ -164,14 +164,14 @@ class GoldSheetController extends Controller
     public function test(Request $request)
     {
 
-        $categories = Categories::select('id', 'name')->get();
+        $categories = Categories::select('id', 'name')->orderBy('created_at', 'ASC')->get();
 
         $data = [];
 
         foreach ($categories as $category) {
             $data['categories'][$category->id]['id'] = $category->id;
             $data['categories'][$category->id]['name'] = $category->name;
-            $karats = Karat::select('id', 'name')->where('category_id', $category->id)->get();
+            $karats = Karat::select('id', 'name')->where('category_id', $category->id)->orderBy('created_at', 'ASC')->get();
             // print_r($karats);
             // die();
             foreach ($karats as $karat) {

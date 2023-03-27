@@ -126,6 +126,25 @@
                                     {{-- {{ @print_r($data['categories']) }} --}}
 
 
+
+
+                                    <tr>
+                                        <td>
+                                            <span>Market</span>
+                                        </td>
+                                        <td>
+                                            <span>SELL</span>
+                                        </td>
+                                        <td>
+                                            <span>BUY</span>
+                                        </td>
+                                        <td>
+                                            <span>Last Updated</span>
+                                        </td>
+                                    </tr>
+                                    <?php $i = 0;
+                                    $sq = 1;
+                                    ?>
                                     @foreach ($data['categories'] as $cate)
                                         <tr>
                                             <td colspan="4">
@@ -135,41 +154,31 @@
 
                                             </td>
                                         </tr>
-
-                                        <tr>
-                                            <td>
-                                                <span>Market</span>
-                                            </td>
-                                            <td>
-                                                <span>SELL</span>
-                                            </td>
-                                            <td>
-                                                <span>BUY</span>
-                                            </td>
-                                            <td>
-                                                <span>Last Updated</span>
-                                            </td>
-                                        </tr>
                                         @if (isset($cate['karats']))
                                             @foreach ($cate['karats'] as $kar)
                                                 <tr>
                                                     <td>
                                                         <span>{{ $kar['name'] }}</span>
-                                                        <input type="hidden" name="market[{{ $cate['id'] }}][]" value="{{ $kar['name'] }}">
+                                                        <input type="hidden" name="market[{{ $cate['id'] }}][]"
+                                                            value="{{ $kar['name'] }}">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control w-100" type="text"
-                                                            onclick="digitValidate(this)" id="sell" name="sell[{{ $cate['id'] }}][]"
+                                                        <input class="form-control w-100 sq" type="text"
+                                                            onclick="digitValidate(this)"
+                                                            id="{{ $kar['name'] }}-{{ $i }}-sell"
+                                                            name="sell[{{ $cate['id'] }}][]"
                                                             value="{{ isset($value->sell) ? $value->sell : '' }}">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control w-100" type="text"
-                                                            onclick="digitValidate(this)" id="buy" name="buy[{{ $cate['id'] }}][]"
+                                                        <input class="form-control w-100 sq" type="text"
+                                                            onclick="digitValidate(this)"
+                                                            id="{{ $kar['name'] }}-{{ $i }}-buy"
+                                                            name="buy[{{ $cate['id'] }}][]"
                                                             value="{{ isset($value->buy) ? $value->buy : '' }}">
                                                     </td>
                                                     <td>
-                                                        <span><input type="date" name="date[{{ $cate['id'] }}][]" id="DateField"
-                                                                value=""></span>
+                                                        <span><input type="date" name="date[{{ $cate['id'] }}][]"
+                                                                id="DateField" value=""></span>
                                                     </td>
                                                 </tr>
                                                 {{-- {{ print_r($kar) }} --}}
@@ -204,6 +213,9 @@
                                                 @endif
                                             @endforeach
                                         @endisset
+                                        <?php $i++;
+                                        // $sq++;
+                                        ?>
                                     @endforeach
 
                                     <tr>
@@ -228,6 +240,7 @@
                                 <button type="button" class="btn btn-primary bg-danger">Cancel</button>
                             </a>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-primary " id="calculate">Calculate</button>
                         </div>
                     </div>
                 </div>
@@ -239,6 +252,106 @@
 
 @push('page-scripts')
     <script>
+        $(document).ready(function() {
+            $("#calculate").click(function() {
+                // <?php $sq = 1; ?>
+
+                var elmId = $("#24K-0-sell").val();
+                var pertola22k = elmId / 24 * 22;
+                var pertola21k = elmId / 24 * 21;
+                var pertola18k = elmId / 24 * 18;
+                var pertola22k = parseInt(pertola22k);
+                var pertola21k = parseInt(pertola21k);
+                var pertola18k = parseInt(pertola18k);
+                var elmId2 = $("#22K-0-sell").val(pertola22k);
+                var elmId2 = $("#21K-0-sell").val(pertola21k);
+                var elmId2 = $("#18K-0-sell").val(pertola18k);
+
+                var elmId = $("#24K-0-sell").val();
+                var gram24k = elmId / 11.664 * 10;
+                var gram22k = pertola22k / 11.664 * 10;
+                var gram21k = pertola21k / 11.664 * 10;
+                var gram18k = pertola18k / 11.664 * 10;
+                var gram24k = parseInt(gram24k);
+                var gram22k = parseInt(gram22k);
+                var gram21k = parseInt(gram21k);
+                var gram18k = parseInt(gram18k);
+                var elmId2 = $("#24K-1-sell").val(gram24k);
+                var elmId2 = $("#22K-1-sell").val(gram22k);
+                var elmId2 = $("#21K-1-sell").val(gram21k);
+                var elmId2 = $("#18K-1-sell").val(gram18k);
+
+                var elmId = $("#24K-0-sell").val();
+                var onegram24k = elmId / 11.664;
+                var onegram22k = pertola22k / 11.664;
+                var onegram21k = pertola21k / 11.664;
+                var onegram18k = pertola18k / 11.664;
+                var onegram24k = parseInt(onegram24k);
+                var onegram22k = parseInt(onegram22k);
+                var onegram21k = parseInt(onegram21k);
+                var onegram18k = parseInt(onegram18k);
+                var elmId2 = $("#24K-2-sell").val(onegram24k);
+                var elmId2 = $("#22K-2-sell").val(onegram22k);
+                var elmId2 = $("#21K-2-sell").val(onegram21k);
+                var elmId2 = $("#18K-2-sell").val(onegram18k);
+
+                // buy
+
+                var elmIdbuy = $("#24K-0-buy").val();
+                var pertola22kbuy = elmIdbuy / 24 * 22;
+                var pertola21kbuy = elmIdbuy / 24 * 21;
+                var pertola18kbuy = elmIdbuy / 24 * 18;
+                var pertola22kbuy = parseInt(pertola22kbuy);
+                var pertola21kbuy = parseInt(pertola21kbuy);
+                var pertola18kbuy = parseInt(pertola18kbuy);
+                var elmId2 = $("#22K-0-buy").val(pertola22kbuy);
+                var elmId2 = $("#21K-0-buy").val(pertola21kbuy);
+                var elmId2 = $("#18K-0-buy").val(pertola18kbuy);
+
+                var elmIdbuy = $("#24K-0-buy").val();
+                var onegram24kbuy = elmIdbuy / 11.664 * 10;
+                var onegram22kbuy = pertola22k / 11.664 * 10;
+                var onegram21kbuy = pertola21k / 11.664 * 10;
+                var onegram18kbuy = pertola18k / 11.664 * 10;
+                var onegram24kbuy = parseInt(onegram24kbuy);
+                var onegram22kbuy = parseInt(onegram22kbuy);
+                var onegram21kbuy = parseInt(onegram21kbuy);
+                var onegram18kbuy = parseInt(onegram18kbuy);
+                var elmId2 = $("#24K-1-buy").val(onegram24kbuy);
+                var elmId2 = $("#22K-1-buy").val(onegram22kbuy);
+                var elmId2 = $("#21K-1-buy").val(onegram21kbuy);
+                var elmId2 = $("#18K-1-buy").val(onegram18kbuy);
+
+                var elmId = $("#24K-0-buy").val();
+                var gram24kbuy = elmId / 11.664;
+                var gram22kbuy = pertola22kbuy / 11.664;
+                var gram21kbuy = pertola21kbuy / 11.664;
+                var gram18kbuy = pertola18kbuy / 11.664;
+                var gram24kbuy = parseInt(onegram24kbuy);
+                var gram22kbuy = parseInt(onegram22kbuy);
+                var gram21kbuy = parseInt(onegram21kbuy);
+                var gram18kbuy = parseInt(onegram18kbuy);
+                var elmId2 = $("#24K-2-buy").val(gram24kbuy);
+                var elmId2 = $("#22K-2-buy").val(gram22kbuy);
+                var elmId2 = $("#21K-2-buy").val(gram21kbuy);
+                var elmId2 = $("#18K-2-buy").val(gram18kbuy);
+
+
+                // var sq = 1;
+                // $('td').each(function() {
+                //     sq++;
+                //     // console.log($(this).text("asd"));
+                //     // var a = '<?php $sq++; ?>;'
+
+                //     var valued = $(".sq").val()
+                //     var total = $(".sq").val(elmId2);
+                //     console.log(a);
+                //     // alert(sq
+                //     // )
+                // })
+
+            });
+        });
         document.getElementById('DateField').valueAsDate = new Date();
         //Submit Form
         $("#sheet_form").validate({
