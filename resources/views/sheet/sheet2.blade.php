@@ -310,9 +310,9 @@
 
                 var elmIdbuy = $("#24K-0-buy").val();
                 var onegram24kbuy = elmIdbuy / 11.664 * 10;
-                var onegram22kbuy = pertola22k / 11.664 * 10;
-                var onegram21kbuy = pertola21k / 11.664 * 10;
-                var onegram18kbuy = pertola18k / 11.664 * 10;
+                var onegram22kbuy = pertola22kbuy / 11.664 * 10;
+                var onegram21kbuy = pertola21kbuy / 11.664 * 10;
+                var onegram18kbuy = pertola18kbuy / 11.664 * 10;
                 var onegram24kbuy = parseInt(onegram24kbuy);
                 var onegram22kbuy = parseInt(onegram22kbuy);
                 var onegram21kbuy = parseInt(onegram21kbuy);
