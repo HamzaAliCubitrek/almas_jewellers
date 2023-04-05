@@ -8,10 +8,11 @@
                     <h1 class="breadcrumb-title">Item</h1>
                 </div>
 
-                <div class="col-4 pull-right text-right">
+                <div class="col-sm-4 pull-right text-right">
                     <a class="btn btn-info" href="{{ url('items') }}"> Back</a>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item">Add Item</li>
@@ -84,7 +85,7 @@
                 <div class="form-group">
                     <strong>Quantity:</strong>
                     <input class="form-control" type="text" id="quantity" name="quantity"
-                        value="@isset($data->quantity){{$data->quantity}}@endisset">
+                        value="@isset($data->quantity){{ $data->quantity }}@endisset">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -97,16 +98,16 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                <strong>Status:</strong>
-                <select name="status" id="status" class="form-control select2">
-                    <option value="">-- Select Status --</option>
-                    @if (count(config('global.group_status')) > 0 && !empty(config('global.group_status')))
-                        @foreach (config('global.group_status') as $key => $val)
-                            <option value="{{ $key }}" @if (isset($data->status) && $key == $data->status) selected @endif>
-                                {{ $val }}</option>
-                        @endforeach
-                    @endif
-                </select>
+                    <strong>Status:</strong>
+                    <select name="status" id="status" class="form-control select2">
+                        <option value="">-- Select Status --</option>
+                        @if (count(config('global.group_status')) > 0 && !empty(config('global.group_status')))
+                            @foreach (config('global.group_status') as $key => $val)
+                                <option value="{{ $key }}" @if (isset($data->status) && $key == $data->status) selected @endif>
+                                    {{ $val }}</option>
+                            @endforeach
+                        @endif
+                    </select>
                 </div>
             </div>
 
@@ -173,28 +174,28 @@
                 form_data.append("id", $("#id").val());
 
                 axios.post(
-                    "{{ url('items/store') }}",
-                    form_data
-                ).then(function(response) {
-                    const obj = response.data;
-                    if (obj.success == true) {
+                        "{{ url('items/store') }}",
+                        form_data
+                    ).then(function(response) {
+                        const obj = response.data;
+                        if (obj.success == true) {
+                            $('#processing-spinner').hide();
+                            successSweetAlert(obj.message);
+                            $("#id").val(obj.data.id);
+                            setTimeout(function() {
+                                window.location.href = "{{ url('items') }}"
+                            }, 1000);
+                        } else {
+                            $('#processing-spinner').hide();
+                            somethingWentWrongSweetAlert(obj.message);
+                            $('#processing-spinner').hide();
+                        }
+                    })
+                    .catch(function(error) {
                         $('#processing-spinner').hide();
-                        successSweetAlert(obj.message);
-                        $("#id").val(obj.data.id);
-                        setTimeout(function() {
-                            window.location.href = "{{ url('items') }}"
-                        }, 1000);
-                    } else {
-                        $('#processing-spinner').hide();
-                        somethingWentWrongSweetAlert(obj.message);
-                        $('#processing-spinner').hide();
-                    }
-                })
-                .catch(function(error) {
-                    $('#processing-spinner').hide();
-                    console.log(error);
-                    somethingWentWrongSweetAlert(JSON.stringify(error.response.data.errors));
-                });
+                        console.log(error);
+                        somethingWentWrongSweetAlert(JSON.stringify(error.response.data.errors));
+                    });
             }
         });
     </script>

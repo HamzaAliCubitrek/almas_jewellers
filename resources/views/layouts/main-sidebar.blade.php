@@ -1,8 +1,9 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
-    <a href="{{ url('/') }}" class="brand-link">
-        <img class="logo-brand" src="{{ asset('viewly_assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+    {{-- <a href="{{ url('/') }}" class="brand-link">
+        
+    </a> --}}
+    <img class="logo-brand" src="{{ asset('viewly_assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-    </a>
 
     <div class="sidebar">
         <nav class="mt-2">

@@ -8,10 +8,11 @@
                     <h1 class="breadcrumb-title">Categories</h1>
                 </div>
 
-                <div class="col-4 pull-right text-right">
-                    <a class="btn btn-info" href="{{ url('Creat Types') }}"> Back</a>
+                <div class="col-sm-4 pull-right text-right">
+                    <a class="btn btn-info" href="{{ url('categories') }}"> Back</a>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item">Add Item</li>

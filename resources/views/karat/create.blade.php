@@ -8,10 +8,11 @@
                     <h1 class="breadcrumb-title">Karat</h1>
                 </div>
 
-                <div class="col-4 pull-right text-right">
+                <div class="col-sm-4 pull-right text-right">
                     <a class="btn btn-info" href="{{ url('Creat Types') }}"> Back</a>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item">Add Item</li>
@@ -37,7 +38,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Categories:</strong>
-                    <select name="category" id="category" class="form-control select2 w-100">
+                    <select name="category" id="category" class="form-control select2">
                         @if (count($categories) > 0)
                             @foreach ($categories as $key => $category)
                                 <option value="{{ $category->id }}"
@@ -51,41 +52,36 @@
                         @endif
                     </select>
                 </div>
+            </div>
 
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Description:</strong>
-                        <input class="form-control" type="text" id="client" name="description"
-                            value="@isset($data->description) {{ $data->description }} @endisset">
-                    </div>
-                </div>
-
-
-
-
-
-
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Status:</strong>
-                        <select name="status" id="status" class="form-control select2">
-                            <option value="">-- Select Status --</option>
-                            @if (count(config('global.group_status')) > 0 && !empty(config('global.group_status')))
-                                @foreach (config('global.group_status') as $key => $val)
-                                    <option value="{{ $key }}" @if (isset($data->status) && $key == $data->status) selected @endif>
-                                        {{ $val }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Description:</strong>
+                    <input class="form-control" type="text" id="client" name="description"
+                        value="@isset($data->description) {{ $data->description }} @endisset">
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Status:</strong>
+                    <select name="status" id="status" class="form-control select2">
+                        <option value="">-- Select Status --</option>
+                        @if (count(config('global.group_status')) > 0 && !empty(config('global.group_status')))
+                            @foreach (config('global.group_status') as $key => $val)
+                                <option value="{{ $key }}" @if (isset($data->status) && $key == $data->status) selected @endif>
+                                    {{ $val }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
     </form>
 @endsection
 
